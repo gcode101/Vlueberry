@@ -1,0 +1,201 @@
+/* Import Outfit Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+:root 
+{
+  --red: rgb(252, 71, 71);
+  --black: rgb(16, 20, 30);
+  --lightGray: rgb(90, 105, 143);
+  --darkGray: rgb(22,29,47);
+  --white: rgb(255,255,255);
+  --font: "Outfit";
+}
+
+body
+{
+  font-family: var(--font);
+  background-color: var(--black);
+  margin: 0;
+  padding: 0;
+}
+
+.page-container
+{
+  width: 91vw;
+  height: 100vh;
+}
+
+.page-wrapper
+{
+  width: 100%;
+  height: 100%;
+}
+
+.full-width
+{
+  width: 100%;
+}
+
+.full-height
+{
+  height: 100%;
+}
+
+.outfit-font
+{
+  font-family: var(--font);
+}
+
+.font-heading-L
+{
+  font-size: 32px;
+  font-weight: 300;
+}
+
+.heading-M
+{
+  font-size: 24px;
+  font-weight: 300;
+}
+
+.heading-S
+{
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.heading-XS
+{
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.body-M
+{
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.body-S
+{
+  font-size: 13px;
+  font-weight: 300;
+}
+
+@media(max-width: 1439px){
+  .page-container{
+      width: 100vw;
+    }
+}
+
+/*+++++++++++login/Signup Page+++++++++++++++++++*/
+
+.logo-container
+{
+  display: flex;
+  justify-content: center;
+  padding: 70px;
+}
+
+.redirect-link
+{
+  display: flex;
+  justify-content: center;
+}
+
+.link-font
+{
+  margin-left: 5px;
+  text-decoration: none;
+  color: rgb(252, 71, 71);
+}
+
+
+
+/*+++++++++++Login/Signup Page+++++++++++++++++++*/
+
+/*+++++++++++MediaList+++++++++++++++++++*/
+
+.media-container
+{
+  margin-top: 80px;
+}
+
+/*+++++++++++MediaList+++++++++++++++++++*/
+
+/*+++++++++++MediaCard+++++++++++++++++++*/
+
+.trending-media-info{
+  margin-top: 140px;
+}
+
+.media-info{
+  display: flex;
+  color: #FFFFFF;
+  margin-left: 10px;
+  align-items: baseline;
+}
+
+.media-info-item{
+  margin-left: 10px;
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 19px;
+  height: 19px;
+  
+  mix-blend-mode: normal;
+  opacity: 0.75;
+  margin-bottom: 5px;
+}
+
+.media-title{
+  color: #FFFFFF;
+  margin-left: 20px;
+  height: 30px;
+  left: 0%;
+  right: 3.33%;
+  top: calc(50% - 30px/2 + 11px);
+
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 30px;
+}
+
+@media (max-width: 767px){
+  .media-heading{
+    font-size: 27px;
+  }
+
+  .media-info-item{
+    font-size: clamp(0.6rem, 2vw, 1.4rem);
+  }
+
+  .media-title{
+    font-size: clamp(1.2rem, 4vw, 1.4rem);
+  }
+
+  .trending-media-info{
+    margin-top: 55px;
+  }
+
+  .trending-heading{
+    font-size: 27px;
+  }
+}
+
+
+
+/*+++++++++++MediaCard+++++++++++++++++++*/
+
+
+
+
+
+
+
+
+
