@@ -11,6 +11,9 @@ require("dotenv").config();
 
 const { DBURI } = process.env;
 
-const sequelize = new Sequelize(DBURI);
+const sequelize = new Sequelize(DBURI, {
+    dialect: 'mysql',
+    dialectModule: require('mysql2')
+});
 
 module.exports = sequelize;
