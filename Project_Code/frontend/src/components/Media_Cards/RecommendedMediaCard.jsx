@@ -50,6 +50,12 @@ const RecommendedMediaCard = ({
     const mediaType = isBookmarkedMedia ? movie.mediaType : movie.media_type; 
     navigate(`/watch/${mediaType}/${mediaID}`);
   }
+  
+  const handleHoverEffect = () => {
+    if(window.innerWidth > 768){
+        setIsHovered(true);
+    }
+  }
 
   return (
     <>
@@ -66,7 +72,7 @@ const RecommendedMediaCard = ({
           className="bookmark-icon"
           alt="Bookmark Icon"
           onClick={toggleBookmark}
-          onMouseEnter={() => setIsHovered(true)} // Set hover state to true on mouse enter
+          onMouseEnter={handleHoverEffect} // Set hover state to true on mouse enter
           onMouseLeave={() => setIsHovered(false)} // Reset hover state on mouse leave
         />
         <PlayButton className="play-button" onClick={handlePlayClick}>
