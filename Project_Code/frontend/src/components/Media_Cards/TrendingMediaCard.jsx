@@ -34,6 +34,12 @@ const TrendingMediaCard = ({ imgSrc, movie, isBookmarked, toggleBookmark }) => {
       navigate(`/watch/${movie.media_type}/${movie.id}`);
     }
 
+    const handleHoverEffect = () => {
+      if(window.innerWidth > 768){
+          setIsHovered(true);
+      }
+    }
+
     return (
       <TrendingContainer imgSrc={imgSrc}>
         <BlankWrapper onClick={handleCardClick}>
@@ -69,7 +75,7 @@ const TrendingMediaCard = ({ imgSrc, movie, isBookmarked, toggleBookmark }) => {
           <BookmarkImage
               src={isHovered ? bookmarkHover : isBookmarked ? bookmarkActive : bookmarkInactive} // Toggle between hover and normal states
               onClick={toggleBookmark}
-              onMouseEnter={() => setIsHovered(true)} // Set hover state to true on mouse enter
+              onMouseEnter={handleHoverEffect} // Set hover state to true on mouse enter
               onMouseLeave={() => setIsHovered(false)} // Reset hover state on mouse leave
           />
       </TrendingContainer>

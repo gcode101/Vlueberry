@@ -19,6 +19,12 @@ const BookmarkButton = ({currentMedia, mediaType, isBookmarkedMedia = false}) =>
             }
         }
     }
+
+    const handleHoverEffect = () => {
+        if(window.innerWidth > 768){
+            setIsHovered(true);
+        }
+    }
     
     return (
         <>
@@ -33,7 +39,7 @@ const BookmarkButton = ({currentMedia, mediaType, isBookmarkedMedia = false}) =>
                 className="bookmark-icon"
                 alt="Bookmark Icon"
                 onClick={handleToggleBookmark}
-                onMouseEnter={() => setIsHovered(true)} // Set hover state to true on mouse enter
+                onMouseEnter={handleHoverEffect} // Set hover state to true on mouse enter
                 onMouseLeave={() => setIsHovered(false)} // Reset hover state on mouse leave
             />
         </>
