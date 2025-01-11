@@ -34,19 +34,18 @@ const useBookmark = (movie, mediaType, isBookmarkedMedia) => {
   }, [user?.id]);
 
   useEffect(() => {
-    let mediaTitle = "";
+    let mediaID = "";
     if(isBookmarkedMedia){
-      mediaTitle = movie.title;
+      mediaID = movie.mediaID;
     }else{
-      mediaTitle = content_type === "movie" ? movie?.title : movie?.name; 
+      mediaID = movie.id.toString();
     }
-    if (!mediaTitle) {
-      // If movie.title is null or undefined, do nothing
+    if (!mediaID) {
+      // If movie.id is null or undefined, do nothing
       return;
     }
-
     const isBookmarked = allUsersBookmarks.some(
-        (bookmark) => bookmark.title === mediaTitle
+        (bookmark) => bookmark.mediaID === mediaID
     );
     setIsBookmarked(isBookmarked);
   }, [allUsersBookmarks, movie]);
