@@ -31,8 +31,8 @@ exports.bookmarkItem = async (req, res) => {
 
         const mediaTitle = mediaType === "movie" ? title : name;
         const mediaReleaseDate = mediaType === "movie" 
-            ? release_date || null
-            : first_air_date || null;
+            ? release_date
+            : first_air_date;
 
         const bookmark = await BookmarkModel.addBookmark({
             userID,

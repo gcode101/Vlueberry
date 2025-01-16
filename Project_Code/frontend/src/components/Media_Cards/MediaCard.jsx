@@ -53,8 +53,23 @@ const MediaCard = ({ movie, type, onRemove = () => {}, isBookmarkedMedia = false
           onRemove(movie.id);
         }
       }
-    } catch(error){
-
+    }catch(error){
+      if(error.response && error.response.status === 409){
+        toast.update(toastId, {
+            render: "Error: Duplicate bookmark!",
+            type: "error",
+            isLoading: false,
+            autoClose: 3000,
+        });
+      }else{
+        console.error("An unexpected error occurred:", error);
+        toast.update(toastId, {
+            render: "Error: Something went wrong. Please try again",
+            type: "error",
+            isLoading: false,
+            autoClose: 3000,
+        });
+      }
     }
   }
 

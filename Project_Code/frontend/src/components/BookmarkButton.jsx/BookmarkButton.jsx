@@ -30,14 +30,25 @@ const BookmarkButton = ({currentMedia, mediaType, isBookmarkedMedia = false}) =>
             });
             
         }catch(error){
-            console.log('Error', error);
-            if(error.response){
-                console.error("Response error data", error.response.data);
-                console.error("Response error status", error.response.status);
+            if(error.response && error.response.status === 409){
+                toast.update(toastId, {
+                    render: "Error: Duplicate bookmark!",
+                    type: "error",
+                    isLoading: false,
+                    autoClose: 3000,
+                });
+            }else{
+                console.error("An unexpected error occurred:", error);
+                toast.update(toastId, {
+                    render: "Error: Something went wrong. Please try again",
+                    type: "error",
+                    isLoading: false,
+                    autoClose: 3000,
+                });
             }
         }
     }
-
+    //Set hover effect for bigger screens only
     const handleHoverEffect = () => {
         if(window.innerWidth > 768){
             setIsHovered(true);

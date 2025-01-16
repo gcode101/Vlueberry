@@ -71,12 +71,7 @@ const useBookmark = (movie, mediaType, isBookmarkedMedia) => {
       }
       setIsBookmarked(!isBookmarked);
     } catch (error) {
-      if(error.response && error.response.status === 409){
-        toast.error("Error: Duplicate bookmark", {position: "bottom-center"});
-      }else{
-        console.error("An unexpected error occurred:", error);
-        toast.error("Error: Something went wrong. Please try again.", {position: "bottom-center"});
-      }
+      throw error;
     }
   };
 
