@@ -57,20 +57,17 @@ const useBookmark = (movie, mediaType, isBookmarkedMedia) => {
       // If user.id or movie.id is null or undefined, do nothing
       return;
     }
-
     try {
       if (isBookmarked) {
         await axios.delete(`${apiURL}/api/bookmark`, {
           params: { userID: user.id, mediaID: movieID },
         });
-        toast.success("Bookmark removed!", {position: "bottom-center"});
       } else {
         await axios.post(`${apiURL}/api/bookmark`, {
           userID: user.id,
           mediaID: movie.id,
           mediaType: content_type,
         });
-        toast.success("Bookmark added!", {position: "bottom-center"});
       }
       setIsBookmarked(!isBookmarked);
     } catch (error) {

@@ -4,11 +4,13 @@ import useBookmark from "../../hooks/useBookmark.jsx";
 import TrendingMediaCard from "./TrendingMediaCard.jsx";
 import RecommendedMediaCard from "./RecommendedMediaCard.jsx";
 import PosterNotFound from "../../assets/poster-not-found.png"
+import { toast } from "react-toastify";
 
 const MediaCard = ({ movie, type, onRemove = () => {}, isBookmarkedMedia = false }) => {
   const [imgSrc, setImgSrc] = useState("");
   const [isBookmarked, toggleBookmark] = useBookmark(movie, null, isBookmarkedMedia);
   const moviePosterUrl = "https://image.tmdb.org/t/p/w500";
+  const [mediaIsBookmarked, setMediaIsBookmarked] = useState(isBookmarked);
 
   // Get the static path to the image required for the media card
   useEffect(() => {
@@ -25,15 +27,34 @@ const MediaCard = ({ movie, type, onRemove = () => {}, isBookmarkedMedia = false
     setImgSrc(imagePath);
   }, [movie]);
 
-  const handleToggleBookmark = async () => {
-    await toggleBookmark();
+  // Update mediaIsBookmarked whenever isBookmarked changes
+  useEffect(() => {
+    setMediaIsBookmarked(isBookmarked);
+  }, [isBookmarked]);
 
-    if(isBookmarked){
-      if(isBookmarkedMedia){
-        onRemove(movie.mediaID);
-      }else{
-        onRemove(movie.id);
+  const handleToggleBookmark = async () => {
+    let message = "";
+    mediaIsBookmarked ? message = "Bookmark removed!" : message = "Bookmark added!";
+    const toastId = toast.loading("Loading...", {position: "bottom-center"});
+    try{
+      await toggleBookmark();
+
+      toast.update(toastId, {
+        render: message,
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+      });
+
+      if(isBookmarked){
+        if(isBookmarkedMedia){
+          onRemove(movie.mediaID);
+        }else{
+          onRemove(movie.id);
+        }
       }
+    } catch(error){
+
     }
   }
 
@@ -47,14 +68,14 @@ const MediaCard = ({ movie, type, onRemove = () => {}, isBookmarkedMedia = false
         <TrendingMediaCard
           imgSrc={imgSrc}
           movie={movie}
-          isBookmarked={isBookmarked}
+          isBookmarked={mediaIsBookmarked}
           toggleBookmark={handleToggleBookmark}
         ></TrendingMediaCard>
       ) : (
         <RecommendedMediaCard
           imgSrc={imgSrc}
           movie={movie}
-          isBookmarked={isBookmarked}
+          isBookmarked={mediaIsBookmarked}
           toggleBookmark={handleToggleBookmark}
           isBookmarkedMedia={isBookmarkedMedia}
         ></RecommendedMediaCard>
