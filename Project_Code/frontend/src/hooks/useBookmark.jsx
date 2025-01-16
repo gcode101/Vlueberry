@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { UserContext } from "../context/User.context.jsx";
 import {getApiUrl} from "../services/ApiUrl.js";
+import { toast } from "react-toastify";
 
 const useBookmark = (movie, mediaType, isBookmarkedMedia) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -36,9 +37,9 @@ const useBookmark = (movie, mediaType, isBookmarkedMedia) => {
   useEffect(() => {
     let mediaID = "";
     if(isBookmarkedMedia){
-      mediaID = movie.mediaID;
+      mediaID = movie?.mediaID;
     }else{
-      mediaID = movie.id.toString();
+      mediaID = movie?.id.toString();
     }
     if (!mediaID) {
       // If movie.id is null or undefined, do nothing
@@ -62,16 +63,23 @@ const useBookmark = (movie, mediaType, isBookmarkedMedia) => {
         await axios.delete(`${apiURL}/api/bookmark`, {
           params: { userID: user.id, mediaID: movieID },
         });
+        toast.success("Bookmark removed!", {position: "bottom-center"});
       } else {
         await axios.post(`${apiURL}/api/bookmark`, {
           userID: user.id,
           mediaID: movie.id,
           mediaType: content_type,
         });
+        toast.success("Bookmark added!", {position: "bottom-center"});
       }
       setIsBookmarked(!isBookmarked);
     } catch (error) {
-      console.error(error.message);
+      if(error.response && error.response.status === 409){
+        toast.error("Error: Duplicate bookmark", {position: "bottom-center"});
+      }else{
+        console.error("An unexpected error occurred:", error);
+        toast.error("Error: Something went wrong. Please try again.", {position: "bottom-center"});
+      }
     }
   };
 
