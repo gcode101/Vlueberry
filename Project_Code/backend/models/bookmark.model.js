@@ -64,6 +64,11 @@ Bookmark.findUserBookmarks = async(userID) => {
     return await Bookmark.findAll({ where: { userID } });
 };
 
+// Add static method to find a bookmark for a user
+Bookmark.findBookmarkItem = async(userID, mediaID) => {
+    return await Bookmark.findOne({ where: { userID, mediaID } });
+}
+
 
 module.exports = Bookmark;
 

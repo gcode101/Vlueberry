@@ -6,6 +6,8 @@ import {Grid, ThemeProvider} from "@mui/material";
 import AppLayoutTheme from "../../services/AppLayoutTheme.jsx";
 import { UserContext } from "../../context/User.context.jsx";
 import {NavigationBarGridContainer} from "./Layout.styles.js";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const Layout = () => {
 
@@ -36,6 +38,7 @@ export const Layout = () => {
         <SearchBar></SearchBar>
         <div style={{ visibility: "hidden", padding: "10px" }}>xd</div>
         <Outlet></Outlet>
+        <ToastContainer />
       </Grid>
     </Grid>
   );

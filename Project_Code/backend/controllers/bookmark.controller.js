@@ -1,11 +1,21 @@
 const BookmarkModel = require('../models/bookmark.model');
 const getMediaJson = require('../services/getMediaJson');
 const { getMediaDetails } = require('../services/tmdbServices');
+const HTTPCodes = require("../helpers/http_codes");
 
 
 //Add new bookmark
 exports.bookmarkItem = async (req, res) => {
     const { userID, mediaID, mediaType } = req.body;
+
+    if (!userID || !mediaID || !mediaType) return;
+
+    const bookmarkItem = await BookmarkModel.findBookmarkItem(userID, mediaID);
+    //Retrun an error conflict response if bookamrk item already exists
+    if (bookmarkItem){
+        console.log("Bookmark already exists");
+        return res.status(HTTPCodes.Conflict).json({ message: "Bookmark already exists" });
+    }
 
     try{
         const mediaDetails = await getMediaDetails(mediaID, mediaType);
@@ -20,7 +30,9 @@ exports.bookmarkItem = async (req, res) => {
         } = mediaDetails;
 
         const mediaTitle = mediaType === "movie" ? title : name;
-        const mediaReleaseDate = mediaType === "movie" ? release_date : first_air_date;
+        const mediaReleaseDate = mediaType === "movie" 
+            ? release_date
+            : first_air_date;
 
         const bookmark = await BookmarkModel.addBookmark({
             userID,

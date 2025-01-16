@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { UserContext } from "../context/User.context.jsx";
 import {getApiUrl} from "../services/ApiUrl.js";
+import { toast } from "react-toastify";
 
 const useBookmark = (movie, mediaType, isBookmarkedMedia) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -34,19 +35,18 @@ const useBookmark = (movie, mediaType, isBookmarkedMedia) => {
   }, [user?.id]);
 
   useEffect(() => {
-    let mediaTitle = "";
+    let mediaID = "";
     if(isBookmarkedMedia){
-      mediaTitle = movie.title;
+      mediaID = movie?.mediaID;
     }else{
-      mediaTitle = content_type === "movie" ? movie?.title : movie?.name; 
+      mediaID = movie?.id.toString();
     }
-    if (!mediaTitle) {
-      // If movie.title is null or undefined, do nothing
+    if (!mediaID) {
+      // If movie.id is null or undefined, do nothing
       return;
     }
-
     const isBookmarked = allUsersBookmarks.some(
-        (bookmark) => bookmark.title === mediaTitle
+        (bookmark) => bookmark.mediaID === mediaID
     );
     setIsBookmarked(isBookmarked);
   }, [allUsersBookmarks, movie]);
@@ -57,7 +57,6 @@ const useBookmark = (movie, mediaType, isBookmarkedMedia) => {
       // If user.id or movie.id is null or undefined, do nothing
       return;
     }
-
     try {
       if (isBookmarked) {
         await axios.delete(`${apiURL}/api/bookmark`, {
@@ -72,7 +71,7 @@ const useBookmark = (movie, mediaType, isBookmarkedMedia) => {
       }
       setIsBookmarked(!isBookmarked);
     } catch (error) {
-      console.error(error.message);
+      throw error;
     }
   };
 
