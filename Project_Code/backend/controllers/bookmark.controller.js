@@ -19,7 +19,6 @@ exports.bookmarkItem = async (req, res) => {
 
     try{
         const mediaDetails = await getMediaDetails(mediaID, mediaType);
-        console.log("Media Details:", mediaDetails);
         const { 
             title, 
             name, 
