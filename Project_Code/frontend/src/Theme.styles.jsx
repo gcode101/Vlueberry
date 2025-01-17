@@ -97,6 +97,26 @@ const theme = createTheme({
                 }
             }
         },
+		//Custom Overrite for Menu
+		MuiMenu: {
+			styleOverrides: {
+				paper: {
+					backgroundColor: 'rgb(16, 20, 30, 0.82)',
+					color: '#fff',
+					borderRadius: '20px',
+				}
+			}
+		},
+		//Custom Overrite for Menu items
+		MuiMenuItem: {
+			styleOverrides: {
+				root: {
+					'&:hover': {
+						backgroundColor: 'rgb(44, 52, 70, 1)',
+					}
+				}
+			}
+		},
     }
 });
 

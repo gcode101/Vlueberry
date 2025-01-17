@@ -19,7 +19,7 @@ import {
 import { Button } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import theme from "../../Theme.styles";
-import BookmarkButton from "../BookmarkButton.jsx/BookmarkButton";
+import BookmarkButton from "../BookmarkButton/BookmarkButton";
 
 
 const WatchMediaContainer = () => {

@@ -23,12 +23,14 @@ import {
 import { UserContext } from "../../context/User.context.jsx";
 import avatar from "../../assets/image-avatar.png";
 import useViewport from "../../services/useViewport.jsx";
+import DropDownProfile from "../DropDownProfile/DropDownProfile.jsx";
 
 export const NavigationBar = () => {
   const location = useLocation();
   const [activePath, setActivePath] = useState(location.pathname);
   const { width } = useViewport();
   const { user, logoutUser } = useContext(UserContext);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const isMobile = width <= 767;
   const isTablet = width >= 768 && width <= 1439;
@@ -41,6 +43,16 @@ export const NavigationBar = () => {
   const onClickLogoutUser = () => {
     logoutUser();
   };
+
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  }
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  }
+
+  const isMenuOpen = Boolean(anchorEl);
 
   // Hover logic for each menu item
   const [hoveredItem, setHoveredItem] = useState(null);
@@ -125,18 +137,25 @@ export const NavigationBar = () => {
         </NavBarLink>
       </NavBarMenuItemsContainer>
       {user ? (
-        <IconButton
-          aria-label="avatar"
-          onClick={onClickLogoutUser}
-          sx={{ paddingTop: isDesktop ? "6em" : 0 }}
-        >
-          <img
-            src={avatar}
-            alt="User Profile Picture Avatar"
-            width={42}
-            style={{ border: "2px solid white", borderRadius: "50%" }}
+        <>
+          <IconButton
+            aria-label="avatar"
+            onClick={handleMenuOpen}
+            sx={{ paddingTop: isDesktop ? "6em" : 0 }}
+          >
+            <img
+              src={avatar}
+              alt="User Profile Picture Avatar"
+              width={42}
+              style={{ border: "2px solid white", borderRadius: "50%" }}
+            />
+          </IconButton>
+          <DropDownProfile 
+            anchorEl={anchorEl}
+            isOpen={isMenuOpen}
+            onClose={handleMenuClose}
           />
-        </IconButton>
+        </>
       ) : (
         <AccountCircleIcon
           sx={{
