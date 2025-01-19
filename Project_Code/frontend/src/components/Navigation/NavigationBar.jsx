@@ -62,10 +62,10 @@ export const NavigationBar = () => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      if(currentScrollY > (lastScrollY + 5) && !isDesktop){
+      if(currentScrollY > (lastScrollY + 10) && !isDesktop){
         //Scrolling down on a small screen
         setIsVisible(false);
-      }else if ((currentScrollY < lastScrollY && !isDesktop)){
+      }else if ((currentScrollY < (lastScrollY - 10) && !isDesktop)){
         //Scrolling up on a small screen
         setIsVisible(true);
       }
