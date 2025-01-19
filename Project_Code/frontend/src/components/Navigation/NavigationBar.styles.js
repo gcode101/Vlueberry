@@ -1,7 +1,9 @@
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 
-export const NavBarContainer = styled("div")(({ theme }) => ({
+export const NavBarContainer = styled("div", {
+  shouldForwardProp: (prop) => prop !== "isVisible", // Prevent passing `isVisible` to the DOM
+})(({ theme, isVisible }) => ({
   display: "flex",
   height: "625px",
   flexDirection: "column",
@@ -11,17 +13,23 @@ export const NavBarContainer = styled("div")(({ theme }) => ({
   paddingBottom: "1rem",
   background: "#161D2F",
   borderRadius: "20px",
+  position: "fixed",
+  zIndex: 1100,
+  transform: isVisible ? "translateY(0)" : "translateY(-100%)",
+  transition: "transform 0.3s ease-in-out",
 // Media queries
   [`@media (min-width: 320px) and (max-width: 1439px)`]: {
-    width: "100%",
-    height: "50%",
+    width: "95%",
+    height: "7%",
+    top: 0,
     flexDirection: "row",
     justifyContent: "space-around",
-    margin: "0 25px 0 25px"
+    margin: "0 25px 0 25px",
   },
   ['@media (max-width: 425px)']: {
     margin: "0",
-    borderRadius:"0"
+    borderRadius:"0",
+    width: "100%"
   }
 
 }));

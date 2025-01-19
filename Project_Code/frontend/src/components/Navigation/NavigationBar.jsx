@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import SiteLogoIcon from "@mui/icons-material/Movie";
 import HomeIcon from "../../assets/icon-nav-home.svg";
 import ActiveHomeIcon from "../../assets/active-icon-nav-home.svg";
@@ -29,8 +29,10 @@ export const NavigationBar = () => {
   const location = useLocation();
   const [activePath, setActivePath] = useState(location.pathname);
   const { width } = useViewport();
-  const { user, logoutUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   const isMobile = width <= 767;
   const isTablet = width >= 768 && width <= 1439;
@@ -38,12 +40,10 @@ export const NavigationBar = () => {
 
   const handleIconClick = (path) => {
     setActivePath(path);
+    window.scrollTo({top: 0});
   };
 
-  const onClickLogoutUser = () => {
-    logoutUser();
-  };
-
+  //Profile dropdown menu
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   }
@@ -57,8 +57,26 @@ export const NavigationBar = () => {
   // Hover logic for each menu item
   const [hoveredItem, setHoveredItem] = useState(null);
 
+  //Scroll behavior
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if(currentScrollY > lastScrollY && !isDesktop){
+        //Scrolling down on a small screen
+        setIsVisible(false);
+      }else if (currentScrollY < lastScrollY && !isDesktop){
+        //Scrolling up on a small screen
+        setIsVisible(true);
+      }
+      setLastScrollY(currentScrollY);
+    }
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY, isDesktop]);
+
   return (
-    <NavBarContainer>
+    <NavBarContainer isVisible={isVisible}>
       <NavBarLink to="/" onClick={() => handleIconClick("/")}>
         <SiteLogoIcon
           sx={{ color: "red", marginBottom: isDesktop ? "20px" : 0 }}

@@ -9,7 +9,7 @@ import { MoviesContext } from "../../context/Movies.context";
 
 export const SearchBar = () => {
   // Import MoviesRoute Context
-  const { setFilteredMovies, loading, setLoading } = useContext(MoviesContext);
+  const { setFilteredMovies, setLoading } = useContext(MoviesContext);
 
   // Import Navigation Handler
   const navigate = useNavigate();
@@ -87,7 +87,7 @@ export const SearchBar = () => {
         <SearchIcon style={{ color: "white" }} />
       </IconButton>
       <StyledInputBase
-        placeholder="Search for movies or TV series"
+        placeholder="Search for movies or shows"
         inputProps={{ "aria-label": "search" }}
         value={searchInput}
         onChange={onHandleInputChange}

@@ -2,7 +2,6 @@ import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 
 export const Search = styled('div')(({ theme }) => ({
-    position: 'relative',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha("rgb(16, 20, 30)", 0.15),
     marginLeft: 0,
@@ -11,6 +10,9 @@ export const Search = styled('div')(({ theme }) => ({
         marginLeft: theme.spacing(1),
         width: 'auto',
     },
+    ["@media(max-width: 1439px)"]: {
+        marginTop: "75px",
+    }
 }));
 
 export const StyledInputBase = styled(InputBase)(({ theme }) => ({
