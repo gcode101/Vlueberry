@@ -61,11 +61,12 @@ export const NavigationBar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      const isTopScreen = window.scrollY === 0;
 
       if(currentScrollY > (lastScrollY + 10) && !isDesktop){
         //Scrolling down on a small screen
         setIsVisible(false);
-      }else if ((currentScrollY < (lastScrollY - 10) && !isDesktop)){
+      }else if ((currentScrollY < (lastScrollY - 10) && !isDesktop) || isTopScreen){
         //Scrolling up on a small screen
         setIsVisible(true);
       }
