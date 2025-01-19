@@ -14,7 +14,6 @@ export const NavBarContainer = styled("div", {
   background: "#161D2F",
   borderRadius: "20px",
   position: "fixed",
-  top: 0,
   zIndex: 1100,
   transform: isVisible ? "translateY(0)" : "translateY(-100%)",
   transition: "transform 0.3s ease-in-out",
@@ -22,6 +21,7 @@ export const NavBarContainer = styled("div", {
   [`@media (min-width: 320px) and (max-width: 1439px)`]: {
     width: "95%",
     height: "7%",
+    top: 0,
     flexDirection: "row",
     justifyContent: "space-around",
     margin: "0 25px 0 25px",

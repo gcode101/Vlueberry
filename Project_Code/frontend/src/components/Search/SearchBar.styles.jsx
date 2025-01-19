@@ -11,7 +11,7 @@ export const Search = styled('div')(({ theme }) => ({
         width: 'auto',
     },
     ["@media(max-width: 1439px)"]: {
-        marginTop: "60px",
+        marginTop: "75px",
     }
 }));
 
