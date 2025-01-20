@@ -150,7 +150,7 @@ export const Bookmarks = () => {
                                 <MediaContainer>
                                     <Grid container spacing= {4}>
                                         {
-                                            bookmarkedMovies.map((movie, index) => (
+                                            [...bookmarkedMovies].reverse().map((movie, index) => (
                                                 <Grid 
                                                     item key={index}
                                                     xs={6}
@@ -195,7 +195,7 @@ export const Bookmarks = () => {
                                 <MediaContainer>
                                     <Grid container spacing= {4}>
                                         {
-                                            bookmarkedShows.map((movie, index) => (
+                                            [...bookmarkedShows].reverse().map((movie, index) => (
                                                 <Grid 
                                                     item key={index}
                                                     xs={6}
