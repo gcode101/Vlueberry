@@ -1,9 +1,15 @@
-import { styled } from "@mui/system";
+import { styled, width } from "@mui/system";
 
-export const SubHeader = styled("div")`
-    display: flex;
-    width: 20%;
-    align-self: center;
-    justify-content: space-evenly;
-    border-bottom: 1px solid white;
-`
+export const SubHeader = styled("div")(({theme}) => ({
+    display: 'flex',
+    width: '30%',
+    alignSelf: 'center',
+    justifyContent: 'space-evenly',
+    borderBottom: '1px solid white',
+    [theme.breakpoints.down('md')]: {
+        width: '50%',
+    },
+    [theme.breakpoints.down('sm')]: {
+        width: '70%',
+    }
+}));
