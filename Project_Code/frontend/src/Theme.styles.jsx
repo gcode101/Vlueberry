@@ -11,15 +11,17 @@ const theme = createTheme({
 			fontFamily: "Outfit",
 			fontWeight: "300",
 			fontSize: "32px",
-			letterSpacing: "-0.5px"	
+			letterSpacing: "-0.5px",	
+			color: "white",
 		},
 		h2: {
 			paddingTop: "40px",
 			paddingBottom: "40px",
 			fontFamily: "Outfit",
 			fontWeight: "300",
-			fontSize: "32px",
-			letterSpacing: "-0.5px"	
+			fontSize: "22px",
+			letterSpacing: "-0.5px",
+			color: "white",
 		},
 		span: {
 			fontFamily: "Outfit",
