@@ -14,12 +14,14 @@ import {
     Genre,
     WatchContainer,
     BackdropImage,
-    TopContainer
+    TopContainer,
+    VideosContainer,
 } from "./WatchMediaContainer.styles";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import theme from "../../Theme.styles";
 import BookmarkButton from "../BookmarkButton/BookmarkButton";
+import MoreVideos from "./MoreVideos";
 
 
 const WatchMediaContainer = () => {
@@ -32,6 +34,7 @@ const WatchMediaContainer = () => {
     const basicImgUrl = "https://image.tmdb.org/t/p";
     const [playTrailer, setPlayTrailer] = useState(false);
     const WatchContainerRef = useRef(null);
+    const [videoList, setVideoList] = useState([]);
 
     useEffect(() => {
         const fetchMedia = async () => {
@@ -44,6 +47,7 @@ const WatchMediaContainer = () => {
                 });
                 setMediaData(media.data);
                 const videos = media.data.videos.results;
+                setVideoList(videos);
                 const videoUrl = getVideoUrl(videos);
                 setVideoUrl(videoUrl);
             }catch(error){
@@ -70,6 +74,12 @@ const WatchMediaContainer = () => {
 
     const handlePlayTrailer = () => {
         setPlayTrailer(!playTrailer);
+    }
+
+    const handleVideoSelect = (videoKey) => {
+        setVideoUrl(`https://www.youtube.com/watch?v=${videoKey}`);
+        scrollToMedia();
+        setPlayTrailer(true);
     }
 
     const scrollToMedia = () => {
@@ -166,6 +176,10 @@ const WatchMediaContainer = () => {
                     </Button>
                     <Overview>{mediaData?.overview}</Overview>
                 </MediaInfoContainer>
+                <Typography variant="p">More Videos ( {videoList.length} )</Typography>
+                <VideosContainer>
+                    <MoreVideos videos={videoList} onVideoSelect={handleVideoSelect}/>
+                </VideosContainer>
             </WatchContainer>
         </ThemeProvider>
     );

@@ -85,3 +85,14 @@ export const Genre = styled("p")`
     text-transform: capitalize;
     font-family: 'Outfit';
 `
+
+export const VideosContainer = styled("div")(({theme}) => ({
+    width: '90%',          
+    maxWidth: '1060px',      
+    overflowX: 'hidden',   
+    display: 'flex',        
+    flexDirection: 'column', 
+    padding: '1rem',
+    boxSizing: 'border-box', 
+    borderTop: '1px solid white'
+}))
