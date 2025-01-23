@@ -23,6 +23,14 @@ const theme = createTheme({
 			letterSpacing: "-0.5px",
 			color: "white",
 		},
+		p: {
+			color: 'rgba(255, 255, 255, 0.9)',
+			fontSize: '1rem',
+			lineHeight: '1.9',
+			marginBottom: '20px',
+			letterSpacing: "-0.5px",
+			fontFamily: 'Outfit',
+		},
 		span: {
 			fontFamily: "Outfit",
 			fontWeight: "300",
