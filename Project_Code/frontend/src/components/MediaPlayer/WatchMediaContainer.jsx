@@ -16,6 +16,9 @@ import {
     BackdropImage,
     TopContainer,
     VideosContainer,
+    DurationData,
+    Status,
+    ComingSoon,
 } from "./WatchMediaContainer.styles";
 import { Button, Typography } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
@@ -149,16 +152,43 @@ const WatchMediaContainer = () => {
                 <MediaInfoContainer>
                     <BookmarkButton currentMedia={mediaData} mediaType={media_type}/>
                     <Title>{media_type === "movie" ? mediaData?.title : mediaData?.name}</Title>
+                    {media_type === "movie" && mediaData?.runtime > 0 && (
+                        <Typography variant="p">Duration: {Math.floor(mediaData.runtime / 60)}h {mediaData.runtime % 60}m</Typography>
+                    )}
                     <ReleaseDate>
                         Release Date: {media_type === "movie" ? mediaData?.release_date : mediaData?.first_air_date}
                     </ReleaseDate>
+                    <Status>
+                        <Typography variant="p">Status: </Typography>
+                        <Genre>{mediaData?.status}</Genre>
+                        {media_type === "tv" && mediaData?.next_episode_to_air && (
+                            <ComingSoon>
+                                <Typography variant="p">Season {mediaData?.next_episode_to_air.season_number} coming soon: </Typography>
+                                <Genre>{mediaData?.next_episode_to_air.air_date}</Genre>
+                            </ComingSoon>
+                        )}
+                    </Status>
+                    {media_type === "tv" && (
+                        <DurationData>
+                            <Typography variant="p">Seasons: </Typography>
+                            <Genre>
+                                {mediaData?.number_of_seasons}
+                            </Genre>
+                            <Typography variant="p">Episodes: </Typography>
+                            <Genre>{mediaData?.number_of_episodes}</Genre>
+                            <Typography variant="p">Last Episode Aired: </Typography>
+                            <Genre>
+                                {mediaData?.last_episode_to_air?.air_date || "N/A"}
+                            </Genre>
+                        </DurationData>
+                    )}
                     <Genres>
                         {
                             (mediaData?.genres)?.map((genre) => (
                                 <Genre>{genre.name}</Genre>
                             ))
                         }
-                    </Genres>
+                    </Genres> 
                     <Button 
                         onClick={() => {
                             handlePlayTrailer();

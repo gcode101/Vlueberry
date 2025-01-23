@@ -21,9 +21,9 @@ const TrendingMediaCard = ({ imgSrc, movie, isBookmarked, toggleBookmark }) => {
       const maxLength = 18;
 
       //Shorten the title based on screen width
-      updateShortenedTitle(movieTitle, maxWinWidth, maxLength, setTitle);
+      setTitle(updateShortenedTitle(movieTitle, maxWinWidth, maxLength));
       //Function reference for the event listener
-      const handleResize = () => updateShortenedTitle(movieTitle, maxWinWidth, maxLength, setTitle);
+      const handleResize = () => setTitle(updateShortenedTitle(movieTitle, maxWinWidth, maxLength));
       //Event Listener
       window.addEventListener("resize", handleResize);
       //Cleanup function runs when component unmounts

@@ -1,4 +1,5 @@
 import { Box, Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
+import { updateShortenedTitle } from "../../services/updateShortenedTitle";
 
 
 const MoreVideos = ({ videos, onVideoSelect }) => {
@@ -34,9 +35,14 @@ const MoreVideos = ({ videos, onVideoSelect }) => {
                                 alt={video.name}
                             />
                             <CardContent sx={{backgroundColor: 'rgba(15, 20, 30, 1)'}}>
+                                <Box sx={{display: 'flex', flexDirection: 'column'}}>
                                 <Typography variant="p">
-                                    {video.name}
+                                    {updateShortenedTitle(video.name, 768, 30)}
                                 </Typography>
+                                <Typography variant="p" sx={{fontSize: '12px'}}>
+                                    {video.published_at.slice(0, 10)}
+                                </Typography>
+                                </Box>
                             </CardContent>
                         </Card>
                     </Grid>
