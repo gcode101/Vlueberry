@@ -13,3 +13,8 @@ export const PlayerWrapper = styled("div")`
     box-shadow: 0px 2px 12px white;
     
 `
+
+export const YouTubePlayer = styled("div")`
+    height: 100%;
+    width: 100%;
+`

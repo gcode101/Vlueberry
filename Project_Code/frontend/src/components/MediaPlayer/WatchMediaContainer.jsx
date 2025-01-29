@@ -31,7 +31,7 @@ const WatchMediaContainer = () => {
     const { id } = useParams();
     const { media_type } = useParams();
     const apiUrl = getApiUrl();
-    const [videoUrl, setVideoUrl] = useState("");
+    const [videoKey, setVideoKey] = useState("");
     const [mediaData, setMediaData] = useState();
     const [backdropUrl, setBackdropUrl] = useState("");
     const basicImgUrl = "https://image.tmdb.org/t/p";
@@ -51,8 +51,8 @@ const WatchMediaContainer = () => {
                 setMediaData(media.data);
                 const videos = media.data.videos.results;
                 setVideoList(videos);
-                const videoUrl = getVideoUrl(videos);
-                setVideoUrl(videoUrl);
+                const videoKey = getvideoKey(videos);
+                setVideoKey(videoKey);
             }catch(error){
                 console.error("Error fetching videos", error);
             }
@@ -66,13 +66,13 @@ const WatchMediaContainer = () => {
         }
     },[mediaData]);
 
-    const getVideoUrl = (videos) => {
+    const getvideoKey = (videos) => {
         const officialTrailer = videos.find(video => video.type === 'Trailer' && video.name.toLowerCase().includes('official'));
         if(officialTrailer){
-            return `https://www.youtube.com/watch?v=${officialTrailer.key}`
+            return officialTrailer.key;
         }
         const firstTrailer = videos.find(video => video.type === 'Trailer');
-        return firstTrailer ? `https://www.youtube.com/watch?v=${firstTrailer.key}` : null;
+        return firstTrailer ? firstTrailer.key : null;
     }
 
     const handlePlayTrailer = () => {
@@ -80,7 +80,7 @@ const WatchMediaContainer = () => {
     }
 
     const handleVideoSelect = (videoKey) => {
-        setVideoUrl(`https://www.youtube.com/watch?v=${videoKey}`);
+        setVideoKey(videoKey);
         scrollToMedia();
         setPlayTrailer(true);
     }
@@ -141,8 +141,8 @@ const WatchMediaContainer = () => {
                     >
                         {
                             playTrailer && (
-                                videoUrl ? (
-                                    <CustomMediaPlayer url={videoUrl}/>
+                                videoKey ? (
+                                    <CustomMediaPlayer videoKey={videoKey}/>
                                 ) : (
                                     <NoVideoMsg color={'white'}>No trailer video found</NoVideoMsg>
                                 )
