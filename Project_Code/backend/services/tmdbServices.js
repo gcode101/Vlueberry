@@ -51,5 +51,25 @@ const searchMedia = async (query) => {
     }
 }
 
-module.exports = { getTrendingMedia, getMediaDetails, searchMedia };
+const getWatchProviders = async (category, mediaID) => {
+    try{
+        const results = await axios.get(`${tmdbBaseUrl}/${category}/${mediaID}/watch/providers`, {
+            params: {
+                api_key: tmdbApiKey,
+                language: 'en-US',
+            }
+        });
+        return results.data;
+    }catch(error){
+        console.error("Error fetching watch providers", error);
+        throw error;
+    }
+}
+
+module.exports = { 
+    getTrendingMedia, 
+    getMediaDetails, 
+    searchMedia,
+    getWatchProviders,
+};
 

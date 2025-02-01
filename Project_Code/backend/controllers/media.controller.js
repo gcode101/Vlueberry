@@ -1,4 +1,4 @@
-const { getTrendingMedia, searchMedia, getMediaDetails } = require("../services/tmdbServices");
+const { getTrendingMedia, searchMedia, getMediaDetails, getWatchProviders } = require("../services/tmdbServices");
 const xss = require("xss");
 
 //Fetch trending media
@@ -38,5 +38,18 @@ exports.fetchMediaItem = async (req, res) => {
     }catch(error){
         console.error("Error fetching media item", error);
         res.status(500).json({error: "Failed to fetch media item"});
+    }
+}
+
+exports.fetchWatchProviders = async (req, res) => {
+    const { mediaType, id } = req.params;
+
+    try{
+        const providersData = await getWatchProviders(mediaType, id);
+        console.log("Watch providers fetched successful");
+        res.status(200).json(providersData);
+    }catch(error){
+        console.error("Error fetching watch providers", error);
+        res.status(500).json({error: "Failed to fetch watch providers"});
     }
 }
