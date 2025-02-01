@@ -55,9 +55,11 @@ export const Title = styled("h1")`
 `
 
 export const ReleaseDate = styled("p")`
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
     color: rgba(255, 255, 255, 0.8);
     font-size: 1rem;
-    margin-bottom: 15px;
     font-family: 'Outfit';
 `
 
@@ -75,7 +77,7 @@ export const Genres = styled("div")`
     gap: 12px;
 `
 
-export const Genre = styled("p")`
+export const Block = styled("p")`
     color: rgba(255, 255, 255, 0.9);
     background-color: rgba(255, 255, 255, 0.1);
     padding: 5px 10px;
