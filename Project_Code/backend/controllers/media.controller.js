@@ -42,7 +42,7 @@ exports.fetchMediaItem = async (req, res) => {
 }
 
 exports.fetchWatchProviders = async (req, res) => {
-    const { mediaType, id } = req.params;
+    const { mediaType, id } = req.query;
 
     try{
         const providersData = await getWatchProviders(mediaType, id);
