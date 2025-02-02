@@ -11,7 +11,7 @@ import {
     ReleaseDate,
     Overview,
     Genres,
-    Genre,
+    Block,
     WatchContainer,
     BackdropImage,
     TopContainer,
@@ -53,6 +53,7 @@ const WatchMediaContainer = () => {
                 setVideoList(videos);
                 const videoKey = getvideoKey(videos);
                 setVideoKey(videoKey);
+                console.log(media.data);
             }catch(error){
                 console.error("Error fetching videos", error);
             }
@@ -156,36 +157,78 @@ const WatchMediaContainer = () => {
                         <Typography variant="p">Duration: {Math.floor(mediaData.runtime / 60)}h {mediaData.runtime % 60}m</Typography>
                     )}
                     <ReleaseDate>
-                        Release Date: {media_type === "movie" ? mediaData?.release_date : mediaData?.first_air_date}
+                        <Typography variant="p">Release Date: </Typography>
+                        {media_type === "movie" ? (
+                            mediaData?.release_date ? (
+                                new Date(`${mediaData?.release_date}T12:00:00`).toLocaleString('en-US', {
+                                        year: 'numeric', 
+                                        month: 'long', 
+                                        day: 'numeric' 
+                                    })
+                                ) : (
+                                    <Block variant="p"> To be determined</Block>
+                                )
+                            )
+                            :
+                            mediaData?.first_air_date ? (
+                                new Date(`${mediaData?.first_air_date}T12:00:00`).toLocaleString('en-US', {
+                                        year: 'numeric', 
+                                        month: 'long', 
+                                        day: 'numeric' 
+                                    })
+                            ):(
+                                <Block variant="p"> To be determined</Block>
+                            )
+                        }
                     </ReleaseDate>
                     <Status>
                         <Typography variant="p">Status: </Typography>
-                        <Genre>{mediaData?.status}</Genre>
+                        <Block>{mediaData?.status}</Block>
                         {media_type === "tv" && mediaData?.next_episode_to_air && (
                             <ComingSoon>
-                                <Typography variant="p">Season {mediaData?.next_episode_to_air.season_number} coming soon: </Typography>
-                                <Genre>{mediaData?.next_episode_to_air.air_date}</Genre>
+                                {mediaData?.next_episode_to_air.episode_number > 1 ? (
+                                    <Typography sx={{border: '1px solid', padding: '5px' }} variant="p">New Episode </Typography>
+                                ):(
+                                    <Typography variant="p">Season {mediaData?.next_episode_to_air.season_number} coming soon:</Typography>
+                                )}
+                                <Typography variant="p">
+                                    {new Date(`${mediaData?.next_episode_to_air.air_date}T12:00:00`).toLocaleDateString('en-US', {
+                                        year: 'numeric',
+                                        month: 'long',
+                                        day: 'numeric'
+                                    })}
+                                </Typography>
                             </ComingSoon>
+                                
                         )}
                     </Status>
                     {media_type === "tv" && (
                         <DurationData>
                             <Typography variant="p">Seasons: </Typography>
-                            <Genre>
+                            <Block>
                                 {mediaData?.number_of_seasons}
-                            </Genre>
+                            </Block>
                             <Typography variant="p">Episodes: </Typography>
-                            <Genre>{mediaData?.number_of_episodes}</Genre>
+                            <Block>{mediaData?.number_of_episodes}</Block>
                             <Typography variant="p">Last Episode Aired: </Typography>
-                            <Genre>
-                                {mediaData?.last_episode_to_air?.air_date || "N/A"}
-                            </Genre>
+                            <Typography variant="p">
+                                {
+                                    mediaData?.last_episode_to_air?.air_date ? (   
+                                        new Date(`${mediaData?.last_episode_to_air?.air_date}T12:00:00`).toLocaleDateString('en-US', {
+                                        year: 'numeric',
+                                        month: 'long',
+                                        day: 'numeric'})
+                                    ):(
+                                        "N/A"
+                                    )
+                                }
+                            </Typography>
                         </DurationData>
                     )}
                     <Genres>
                         {
                             (mediaData?.genres)?.map((genre) => (
-                                <Genre>{genre.name}</Genre>
+                                <Block>{genre.name}</Block>
                             ))
                         }
                     </Genres> 
