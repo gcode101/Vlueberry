@@ -23,6 +23,12 @@ const theme = createTheme({
 			letterSpacing: "-0.5px",
 			color: "white",
 		},
+		h6: {
+			fontFamily: "Outfit",
+			fontWeight: "300",
+			letterSpacing: "-0.5px",	
+			color: "white",
+		},
 		p: {
 			color: 'rgba(255, 255, 255, 0.9)',
 			fontSize: '1rem',
@@ -35,6 +41,18 @@ const theme = createTheme({
 			fontFamily: "Outfit",
 			fontWeight: "300",
 			letterSpacing: "-0.5px"
+		},
+		subtitle1: {
+			fontFamily: "Outfit",
+			fontWeight: "300",
+			letterSpacing: "-0.5px",	
+			color: "white",
+		},
+		caption: {
+			fontFamily: "Outfit",
+			fontWeight: "300",
+			letterSpacing: "-0.5px",	
+			color: "white",
 		}
 	},
 	components: {

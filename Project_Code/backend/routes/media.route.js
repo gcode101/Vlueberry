@@ -12,5 +12,7 @@ router.get("/trending", mediaController.fetchTrendingMedia);
 router.get("/search", mediaController.searchMediaItems);
 // Try out GET http://localhost:8000/media/mediaItem
 router.get("/mediaItem", mediaController.fetchMediaItem);
+// Try out GET http://localhost:8000/media/watch-providers
+router.get("/watch-providers", mediaController.fetchWatchProviders);
 
 module.exports = router;

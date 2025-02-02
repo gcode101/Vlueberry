@@ -25,6 +25,7 @@ import { ThemeProvider } from "@emotion/react";
 import theme from "../../Theme.styles";
 import BookmarkButton from "../BookmarkButton/BookmarkButton";
 import MoreVideos from "./MoreVideos";
+import WatchProviders from "./WatchProviders";
 
 
 const WatchMediaContainer = () => {
@@ -247,6 +248,10 @@ const WatchMediaContainer = () => {
                     >
                         {playTrailer ? "Close Video" : "Play Trailer"}
                     </Button>
+                    <WatchProviders mediaType={media_type} id={id}/>
+                    <Typography sx={{mt: 4}} variant="h6" gutterBottom>
+                        Overview:
+                    </Typography>
                     <Overview>{mediaData?.overview}</Overview>
                 </MediaInfoContainer>
                 <Typography variant="p">More Videos ( {videoList.length} )</Typography>
