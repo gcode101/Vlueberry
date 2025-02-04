@@ -29,7 +29,7 @@ const CustomMediaPlayer = ({ videoKey }) => {
     if (!window.YT) {
       // Load the YouTube IFrame API script
       const tag = document.createElement('script');
-      tag.src = 'https://www.youtube-nocookie.com/iframe_api';
+      tag.src = 'https://www.youtube.com/iframe_api';
       document.body.appendChild(tag);
 
       // Wait for the API to load
