@@ -17,7 +17,7 @@ const CustomMediaPlayer = ({ videoKey }) => {
           controls: 1,
           modestbranding: 1,
           rel: 0,
-          origin: window.location.origin,
+          enablejsapi: 1,
         },
         events: {
           onError: (event) => console.error('YouTube Player Error:', event.data),
