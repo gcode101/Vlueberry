@@ -17,7 +17,7 @@ const CustomMediaPlayer = ({ videoKey }) => {
           controls: 1,
           modestbranding: 1,
           rel: 0,
-          origin: window.location.origin,
+          enablejsapi: 1,
         },
         events: {
           onError: (event) => console.error('YouTube Player Error:', event.data),
@@ -29,7 +29,7 @@ const CustomMediaPlayer = ({ videoKey }) => {
     if (!window.YT) {
       // Load the YouTube IFrame API script
       const tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
+      tag.src = 'https://www.youtube-nocookie.com/iframe_api';
       document.body.appendChild(tag);
 
       // Wait for the API to load
