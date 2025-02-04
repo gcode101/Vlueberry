@@ -73,7 +73,7 @@ const WatchMediaContainer = () => {
         if(officialTrailer){
             return officialTrailer.key;
         }
-        const firstTrailer = videos.find(video => video.type === 'Trailer');
+        const firstTrailer = videos.find(video => video.type === 'Trailer' || video.type === 'Teaser');
         return firstTrailer ? firstTrailer.key : null;
     }
 
