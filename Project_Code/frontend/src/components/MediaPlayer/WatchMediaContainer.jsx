@@ -26,6 +26,7 @@ import theme from "../../Theme.styles";
 import BookmarkButton from "../BookmarkButton/BookmarkButton";
 import MoreVideos from "./MoreVideos";
 import WatchProviders from "./WatchProviders";
+import BackdropPlaceholder from "../../assets/media-placeholder-img.png"
 
 
 const WatchMediaContainer = () => {
@@ -63,8 +64,12 @@ const WatchMediaContainer = () => {
     },[])
 
     useEffect(()=> {
-        if(mediaData){
+        if(mediaData && mediaData.backdrop_path){
             setBackdropUrl(`${basicImgUrl}/original/${mediaData.backdrop_path}`);
+        }else if(mediaData && mediaData.poster_path){
+            setBackdropUrl(`${basicImgUrl}/original/${mediaData.poster_path}`);
+        }else{
+            setBackdropUrl(BackdropPlaceholder);
         }
     },[mediaData]);
 
