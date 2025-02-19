@@ -7,7 +7,7 @@ import { MediaContainer, StyledBox } from "./MediaCardsContainer.styles";
 import { getApiUrl } from "../../services/ApiUrl";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { momentum } from 'ldrs'
+import { momentum } from 'ldrs';
 
 const MediaCardsContainer = () => {
 
