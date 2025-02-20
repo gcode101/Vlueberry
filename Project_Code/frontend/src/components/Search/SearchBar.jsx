@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
-import { IconButton } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import axios from "axios";
 import { getApiUrl } from "../../services/ApiUrl";
 import { Search, StyledInputBase } from "./SearchBar.styles";
@@ -19,13 +19,32 @@ export const SearchBar = () => {
   // Let the user user the search input
   const [searchInput, setSearchInput] = useState("");
 
+  // Get the API URL
   const apiUrl = getApiUrl();
+
+  // Show the search button
+  const [showSearchButton, setShowSearchButton] = useState(false);
+
+  // Create a reference to the input field
+  const inputRef = React.createRef();
 
   useEffect(() => {
     if(location.pathname !== '/search'){
       setSearchInput('');
     }
   }, [location]);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (inputRef.current && !inputRef.current.contains(e.target)) {
+        setShowSearchButton(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+  },[inputRef])
 
   const onHandleInputChange = (e) => {
     // Change value of searchInput to whatever the user wrote right now
@@ -78,10 +97,9 @@ export const SearchBar = () => {
   };
 
   return (
-    <Search>
+    <Search ref={inputRef}>
       <IconButton
         aria-label="search"
-        style={{ position: "relative", top: "50px" }}
         onClick={onHandleSearchButtonClick}
       >
         <SearchIcon style={{ color: "white" }} />
@@ -92,7 +110,35 @@ export const SearchBar = () => {
         value={searchInput}
         onChange={onHandleInputChange}
         onKeyDown={onHandleKeyDownPress}
+        onFocus={() => setShowSearchButton(true)}
       />
+      
+        <Button 
+          variant="contained"
+          style={{
+            backgroundColor: "rgb(252, 71, 71)",
+            transition: "transform 0.5s ease, opacity 0.3s ease",
+            transform: showSearchButton ? "translateX(0)" : "translateX(100%)",
+            opacity: showSearchButton ? 1 : 0,
+            pointerEvents: showSearchButton ? "auto" : "none"
+          }}
+          sx={{
+            fontFamily: "Outfit",
+            fontWeight: "300",
+            fontSize: {
+              xs: "12px",
+              md: "15px",
+            },
+            marginRight: {
+              xs: "12px",
+              sm: "30px",
+            }
+          }}
+          onClick={onHandleSearchButtonClick}
+        >
+            Search
+        </Button>
+      
     </Search>
   );
 };
