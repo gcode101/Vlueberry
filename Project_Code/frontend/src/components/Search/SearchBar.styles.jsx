@@ -2,23 +2,26 @@ import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 
 export const Search = styled('div')(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha("rgb(16, 20, 30)", 0.15),
     marginLeft: 0,
     width: '90%',
+    marginTop: "50px",
     [theme.breakpoints.up('sm')]: {
         marginLeft: theme.spacing(1),
         width: 'auto',
     },
     ["@media(max-width: 1439px)"]: {
-        marginTop: "75px",
+        marginTop: "100px",
+        width: "100vw",
     }
 }));
 
 export const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: 'white',
     width: '97%',
-    marginLeft: "50px",
     fontSize: "24px",
     fontWeight: "300",
     fontFamily: "Outfit",
@@ -32,5 +35,8 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
     [theme.breakpoints.down('lg')]: {
         width: '94%'
+    },
+    [theme.breakpoints.down('md')]: {
+        fontSize: "20px",
     }
 }));
