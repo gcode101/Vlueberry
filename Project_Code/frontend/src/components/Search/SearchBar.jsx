@@ -111,16 +111,25 @@ export const SearchBar = () => {
         onChange={onHandleInputChange}
         onKeyDown={onHandleKeyDownPress}
         onFocus={() => setShowSearchButton(true)}
+        style={{
+          transition: "width 0.3s ease",
+        }}
+        sx={{
+          width: {
+            xs: showSearchButton ? "calc(100% - 120px)" : "100%",
+            sm: showSearchButton ? "calc(100% - 143px)" : "100%",
+          },
+        }}
       />
       
         <Button 
           variant="contained"
           style={{
             backgroundColor: "rgb(252, 71, 71)",
-            transition: "transform 0.5s ease, opacity 0.3s ease",
-            transform: showSearchButton ? "translateX(0)" : "translateX(100%)",
+            transition: "opacity 0.3s ease",
             opacity: showSearchButton ? 1 : 0,
-            pointerEvents: showSearchButton ? "auto" : "none"
+            position: "absolute",
+            right: "0",
           }}
           sx={{
             fontFamily: "Outfit",
@@ -136,7 +145,7 @@ export const SearchBar = () => {
           }}
           onClick={onHandleSearchButtonClick}
         >
-            Search
+          Go
         </Button>
       
     </Search>

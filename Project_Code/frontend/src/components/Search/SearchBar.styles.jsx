@@ -7,7 +7,7 @@ export const Search = styled('div')(({ theme }) => ({
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha("rgb(16, 20, 30)", 0.15),
     marginLeft: 0,
-    width: '90%',
+    width: '100%',
     marginTop: "50px",
     [theme.breakpoints.up('sm')]: {
         marginLeft: theme.spacing(1),
